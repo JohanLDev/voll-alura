@@ -10,10 +10,9 @@ import med.voll.api.direccion.Direccion;
 
 @Table(name = "medicos")
 @Entity(name = "Medico")
-@Getter // crea internamente los getters de los atributos
-@NoArgsConstructor // crea un contructor vacio
 @AllArgsConstructor // crea un contructor con todos los atributos
 @EqualsAndHashCode(of = "id")
+@Getter // crea internamente los getters de los atributos
 public class Medico {
 
     @Id

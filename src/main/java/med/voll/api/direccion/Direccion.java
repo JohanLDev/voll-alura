@@ -22,9 +22,6 @@ public class Direccion {
     private String estado;
 
 
-    public Direccion() {
-    }
-
     public Direccion(DatosDireccion datosDireccion) {
         this.calle = datosDireccion.calle();
         this.numero = datosDireccion.numero();
