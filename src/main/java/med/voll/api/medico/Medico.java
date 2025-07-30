@@ -8,22 +8,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import med.voll.api.direccion.Direccion;
 
+@Table(name = "medicos")
+@Entity(name = "Medico")
 @Getter // crea internamente los getters de los atributos
 @NoArgsConstructor // crea un contructor vacio
 @AllArgsConstructor // crea un contructor con todos los atributos
 @EqualsAndHashCode(of = "id")
-@Table(name = "medicos")
-@Entity(name = "Medico")
 public class Medico {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
     private String nombre;
     private String email;
     private String documento;
+    private String telefono;
 
     @Enumerated(EnumType.STRING)
     private Especialidad especialidad;
@@ -32,4 +33,16 @@ public class Medico {
     @Embedded
     private Direccion direccion;
 
+    public Medico() {
+    }
+
+    public Medico(DatosRegistroMedico datos) {
+        this.id = null;
+        this.nombre = datos.nombre();
+        this.email = datos.email();
+        this.documento = datos.documento();
+        this.especialidad = datos.especialidad();
+        this.direccion = new Direccion(datos.datosDireccion());
+        this.telefono = datos.telefono();
+    }
 }
