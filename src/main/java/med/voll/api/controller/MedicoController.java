@@ -46,7 +46,13 @@ public class MedicoController {
         // Internamente sabe que obtenemos el médico por referencia, y al actualizar el objeto, este lo actualizará.
           var medico = repository.getReferenceById(datos.id());
           medico.actualizarInformaciones(datos);
+    }
 
+    @Transactional
+    @DeleteMapping("/{id}")
+    public void eliminar(@PathVariable Long id){
+        var medico = repository.getReferenceById(id);
+        medico.eliminar();
     }
 
 }
