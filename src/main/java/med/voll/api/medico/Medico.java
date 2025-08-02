@@ -2,6 +2,7 @@ package med.voll.api.medico;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -43,5 +44,25 @@ public class Medico {
         this.especialidad = datos.especialidad();
         this.direccion = new Direccion(datos.datosDireccion());
         this.telefono = datos.telefono();
+    }
+
+    /**
+     * Método para actualizar los datos permitidos de un médico. Se valida los datos por si no se desea actualizar todo.
+     * @param datos DTO con los datos a actualizar.
+     */
+    public void actualizarInformaciones(@Valid DatosActualizacionMedico datos) {
+
+        if(datos.nombre() != null){
+            this.nombre = datos.nombre();
+        }
+
+        if(datos.telefono() != null){
+            this.telefono = datos.telefono();
+        }
+
+        if(datos.direccion() != null){
+            this.direccion.actualizarDireccion(datos.direccion());
+        }
+
     }
 }
